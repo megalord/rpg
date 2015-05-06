@@ -31,12 +31,6 @@
 
 (define mountain (rotate (parse "mountain.obj") +x+y+z 120))
 
-;(cube origin 1/2)
-;(quad (pos 5 0 0)
-;      (pos 0 5 0)
-;      (pos -5 0 0)
-;      (pos 0 -5 0))
-
 (define (on-draw s n t)
   (combine 
     mountain
