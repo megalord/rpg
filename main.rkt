@@ -4,7 +4,7 @@
          pict3d/universe
          "movement.rkt"
          "state.rkt"
-         "parser.rkt")
+         "parser/obj.rkt")
  
 (define (set-time-delta! s t)
   (hash-set! s "dt" (- t (hash-ref s "prev-time")))
@@ -15,14 +15,11 @@
   (move-self s)
   s)
 
-(define lights
-  (combine (light (pos 0 1 2) (emitted "Thistle"))
-           (light (pos 0 -1 -2) (emitted "PowderBlue"))))
-
 (define (camera s)
   (basis 'camera (point-at
                    (hash-ref s "position") 
                    (hash-ref s "direction"))))
+
 (define axes
   (combine
     (with-emitted (emitted "cyan" 2) (arrow origin +x))
@@ -36,6 +33,7 @@
     mountain
     axes
     lights
+    (sunlight (dir 0 0 -1) (emitted "white" 5))
     (camera s)))
  
 (define (key-setter v)
