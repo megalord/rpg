@@ -32,7 +32,6 @@
   (combine 
     mountain
     axes
-    lights
     (sunlight (dir 0 0 -1) (emitted "white" 5))
     (camera s)))
  
@@ -42,6 +41,8 @@
      s))
 
 (big-bang3d init-state
+            #:width 800
+            #:height 600
             #:on-frame on-frame
             #:on-draw on-draw
             #:on-key (key-setter #t)

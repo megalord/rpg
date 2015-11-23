@@ -30,13 +30,20 @@
         (s? (hash-get-in s '("keys" "s")))
         (d? (hash-get-in s '("keys" "d")))
         (q? (hash-get-in s '("keys" "q"))) 
-        (e? (hash-get-in s '("keys" "e")))) 
-    (when (xor w? s?)
-      (hash-set! s "position" (pos+ position direction (* time-scale dt (if w? 1 -1)))))
+        (e? (hash-get-in s '("keys" "e")))
+        (x? (hash-get-in s '("keys" "x")))
+        (space? (hash-get-in s '("keys" " "))))
     (when (xor a? d?)
       (hash-set! s "direction" (turn direction (* time-scale dt) #:clockwise? a?)))
+    (when (xor w? s?)
+      (set! position
+        (pos+ position direction (* time-scale dt (if w? 1 -1)))))
     (when (xor q? e?)
-      (hash-set! s "position" 
-                 (pos+ (hash-ref s "position")
-                       (perpendicular direction #:clockwise? q?)
-                       (* time-scale dt))))))
+      (set! position
+        (pos+ position
+              (perpendicular direction #:clockwise? q?)
+              (* time-scale dt))))
+    (when (xor space? x?)
+      (set! position
+        (pos+ position -z (* time-scale dt (if x? 1 -1)))))
+    (hash-set! s "position" position)))

@@ -29,5 +29,7 @@
         (hash-set-in ht '("keys" "d") #f)
         (hash-set-in ht '("keys" "q") #f)
         (hash-set-in ht '("keys" "e") #f)
+        (hash-set-in ht '("keys" "x") #f)
+        (hash-set-in ht '("keys" " ") #f)
         ht))
 
